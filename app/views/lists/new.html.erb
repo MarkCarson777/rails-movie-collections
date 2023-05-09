@@ -1,0 +1,5 @@
+<%= form_with model: @list do |f| %>
+  <%= f.text_field :name %>
+  <%= f.file_field :photo, as: :file %>
+  <%= f.submit "Create List" %>
+<% end %>

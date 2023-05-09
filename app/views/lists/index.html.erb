@@ -1,0 +1,33 @@
+<div class="home_container">
+
+  <div class="list_card_container">
+    <% @lists.each do |list| %>
+      <div class="list_card">
+        <%= button_to list_path(list), method: :delete, :class => "btn_remove" do %>
+          <i class="fa-solid fa-xmark"></i>
+        <% end %>
+        <% if list.photo.present? %>
+          <div class="list_card_img--gradient">
+            <%= cl_image_tag list.photo.key, :class => "list_card_img" %>
+          </div>
+        <% end %>
+        <div class="list_card_content">
+          <div class="list_card_info">
+            <%= @avg_rating %>
+            <h2 class="list_card_title">
+              <%= list.name %>
+            </h2>
+            <div class="list_card_info_pill">
+              <span>
+                <%= list.bookmarks.count %> bookmark<% if @movies_count > 1 %>s<% end %> 
+              </span>
+            </div>
+          </div>
+          <div class="list_card_button list_card_button--position">
+            <%= button_to 'View', list_path(list), method: :get, :class => "btn_primary", :style => "margin-right: 1.5rem;" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

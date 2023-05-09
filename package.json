@@ -1,0 +1,21 @@
+{
+  "name": "app",
+  "private": "true",
+  "dependencies": {
+    "@hotwired/stimulus": "^3.2.1",
+    "@hotwired/turbo-rails": "^7.2.4",
+    "@popperjs/core": "^2.11.6",
+    "@rails/webpacker": "5.4.4",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^3.3.12"
+  },
+  "scripts": {
+    "build": "webpack --config webpack.config.js",
+    "storybook:build": "build-storybook -o public/_storybook"
+  },
+  "devDependencies": {
+    "@storybook/addon-controls": "^6.5.16",
+    "@storybook/server": "^6.5.16",
+    "webpack-dev-server": "^3"
+  }
+}

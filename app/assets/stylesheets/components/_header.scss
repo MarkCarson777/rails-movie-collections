@@ -1,0 +1,17 @@
+.header_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+  width: 100%;
+  background-color: white;
+}
+
+.header_title {
+  margin: 0 0 0 16px;
+  font-family: helvetica;
+}
+
+.header_btn {
+  margin-right: 8px;
+}

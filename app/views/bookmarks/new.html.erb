@@ -1,0 +1,6 @@
+<h3>Add a movie to your <%= @list.name %> list</h3>
+<%= form_for [@list, @bookmark] do |f| %>
+  <%= f.text_area :comment, placeholder: "Enter a comment about the movie" %>
+  <%= f.collection_select(:movie_id, Movie.all, :id, :title) %>
+  <%= f.submit %>
+<% end %>

@@ -1,0 +1,38 @@
+<h1><%= @list.name %></h1>
+<%= link_to "Add Movie", new_list_bookmark_path(@list) %>
+<ul>
+  <% @list.movies.each do |movie| %>
+    <% bookmark = Bookmark.find_by(list: @list, movie: movie) %>
+    <%= image_tag movie.poster_url, width: 400, height: 300, crop: :fill %>
+    <li>
+      <div>
+        <%= movie.title %>
+        <%= movie.rating %>
+      </div>
+      <div>
+        <%= movie.overview %>
+      </div>
+      <div>
+        <%= bookmark.comment %>
+      </div>
+    </li>
+    <%= button_to 'Remove', bookmark_path(bookmark), method: :delete %>
+  <% end %>
+</ul>
+
+<h3>Reviews</h3>
+
+<% @list.reviews.each do |review| %>
+  <div>
+    <p><%= review.rating %></p>
+    <p><%= review.content %></p>
+  </div>
+<% end %>
+
+<%= form_for [@list, @review] do |f| %>
+  <%= f.text_area :content %>
+  <%= f.select :rating, options_for_select(1..5), required: true %>
+  <%= f.submit %>
+<% end %>
+
+<%= link_to 'Back', lists_path %>

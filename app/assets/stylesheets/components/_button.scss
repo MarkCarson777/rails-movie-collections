@@ -1,0 +1,24 @@
+.btn_primary {
+  border: none;
+  height: 48px;
+  padding: 0 2rem;
+  width: fit-content;
+  background-color: #1e2db5;
+  color: white;
+  font-family: Helvetica;
+  font-size: 1rem;
+}
+
+.btn_remove {
+  position: absolute;
+  right: 0;
+  z-index: 1000;
+  border: none;
+  border-radius: 50%;
+  margin-top: 1.2rem;
+  margin-right: 1.2rem;
+  height: 36px;
+  width: 36px;
+  background-color: white;
+  color: black;
+}
