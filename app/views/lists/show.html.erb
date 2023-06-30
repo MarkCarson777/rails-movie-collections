@@ -36,16 +36,18 @@
     <span class="review_average--text"><%= average_rating %> out of 5</span>
   </div>
   <span class="review_average--total"><%= total_ratings %> user ratings</span>
-  <% @list.reviews.each do |review| %>
-    <div class="review_card">
-      <p>
-        <% review.rating.times do %>
-          <i class="fas fa-star review--star"></i>
-        <% end %>
-      </p>
-      <p><%= review.content %></p>
-    </div>
-  <% end %>
+  <div class="review_card--container hidden">
+    <% @list.reviews.each do |review| %>
+      <div class="review_card">
+        <p>
+          <% review.rating.times do %>
+            <i class="fas fa-star review--star"></i>
+          <% end %>
+        </p>
+        <p><%= review.content %></p>
+      </div>
+    <% end %>
+  </div>
   <%= form_for [@list, @review] do |f| %>
     <%= f.text_area :content %>
     <%= f.select :rating, options_for_select(1..5), required: true %>
@@ -53,4 +55,19 @@
   <% end %>
 </div>
 
-<%= link_to 'Back', lists_path %>
+<style>
+  .hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const container = document.querySelector(".review_average--container");
+    const reviewCard = document.querySelector(".review_card--container");
+
+    container.addEventListener("click", function() {
+      reviewCard.classList.toggle("hidden");
+    });
+  });
+</script>
