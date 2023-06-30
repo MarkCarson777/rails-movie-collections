@@ -13,7 +13,18 @@
         <% end %>
         <div class="list_card_content">
           <div class="list_card_info">
-            <%= @avg_rating %>
+            <div>
+              <% total_ratings = list.reviews.size %>
+              <% sum_ratings = list.reviews.sum(&:rating) %>
+              <% average_rating = total_ratings > 0 ? (sum_ratings.to_f / total_ratings).round : 0.0 %>
+              <% (1..5).each do |i| %>
+                <% if i <= average_rating %>
+                  <i class="fas fa-star review_collection--star"></i>
+                <% else %>
+                  <i class="far fa-star review_collection--star"></i>
+                <% end %>
+              <% end %>
+            </div>
             <h2 class="list_card_title">
               <%= list.name %>
             </h2>

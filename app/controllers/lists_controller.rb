@@ -3,13 +3,7 @@ class ListsController < ApplicationController
   
   def index
     @lists = List.all
-    # debugging
-    # 1: raise @lists.inspec
-    # 2: logger.debug "@lists == #{@lists.inspect}"
-    # check logs/development
     @movies_count = Bookmark.count
-    # avg_rating = list.reviews.sum(:rating).to_f / list.reviews.count.to_f 
-    # @avg_rating = average_rating(List.all)
   end
 
   def new
@@ -44,10 +38,4 @@ class ListsController < ApplicationController
   def set_list
     @list = List.find(params[:id])
   end
-
-  # def average_rating(lists)
-  #   lists.reviews.each do |review|
-  #     X
-  #   end
-  # end
 end
