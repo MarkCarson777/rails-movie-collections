@@ -1,0 +1,33 @@
+.review_average--container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.review_average {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  padding: 1rem 1.5rem;
+  border-radius: 9999px;
+  background-color: #f4f9ff;
+}
+
+.review_average--star {
+  margin-right: 0.4rem;
+  font-size: 1.2rem;
+  color: #ffc859;
+}
+
+.review_average--text,
+.review_average--total {
+  padding-top: 0.2rem;
+  font-size: 0.8rem;
+  color: #717274;
+}
+
+.review_card {
+  width: 200px;
+  margin-bottom: 8px;
+  background-color: yellow;
+}

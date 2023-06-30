@@ -1,29 +1,45 @@
 <h1><%= @list.name %></h1>
-<%= link_to "Add Movie", new_list_bookmark_path(@list) %>
-<ul>
+<div class="btn_primary">
+  <%= link_to "Add Movie", new_list_bookmark_path(@list) %>
+</div>
+<div class="movies_container">
   <% @list.movies.each do |movie| %>
-    <% bookmark = Bookmark.find_by(list: @list, movie: movie) %>
-    <%= image_tag movie.poster_url, width: 400, height: 300, crop: :fill %>
-    <li>
-      <div>
+    <div class="movie_card">
+      <% bookmark = Bookmark.find_by(list: @list, movie: movie) %>
+      <%= image_tag movie.poster_url, width: 400, height: 300, crop: :fill %>
+      <h2>
         <%= movie.title %>
         <%= movie.rating %>
-      </div>
+      </h2>
       <div>
         <%= movie.overview %>
       </div>
-      <div>
-        <%= bookmark.comment %>
-      </div>
-    </li>
-    <%= button_to 'Remove', bookmark_path(bookmark), method: :delete %>
+      <%= button_to 'Remove', bookmark_path(bookmark), method: :delete, :class => "btn_primary" %>
+    </div>
   <% end %>
-</ul>
+</div>
 
-<h3>Reviews</h3>
+<h3>List reviews</h3>
+
+<% total_ratings = @list.reviews.size %>
+<% sum_ratings = @list.reviews.sum(&:rating) %>
+<% average_rating = total_ratings > 0 ? (sum_ratings.to_f / total_ratings).round : 0.0 %>
+<div class="review_average--container">
+  <div class="review_average">
+    <% (1..5).each do |i| %>
+      <% if i <= average_rating %>
+        <i class="fas fa-star review_average--star"></i>
+      <% else %>
+        <i class="far fa-star review_average--star"></i>
+      <% end %>
+    <% end %>
+    <span class="review_average--text"><%= average_rating %> out of 5</span>
+  </div>
+  <span class="review_average--total"><%= total_ratings %> user ratings</span>
+</div>
 
 <% @list.reviews.each do |review| %>
-  <div>
+  <div class="review_card">
     <p><%= review.rating %></p>
     <p><%= review.content %></p>
   </div>
@@ -32,7 +48,7 @@
 <%= form_for [@list, @review] do |f| %>
   <%= f.text_area :content %>
   <%= f.select :rating, options_for_select(1..5), required: true %>
-  <%= f.submit %>
+  <%= f.submit "Rate my list" %>
 <% end %>
 
 <%= link_to 'Back', lists_path %>
