@@ -28,27 +28,29 @@
   <div class="review_average">
     <% (1..5).each do |i| %>
       <% if i <= average_rating %>
-        <i class="fas fa-star review_average--star"></i>
+        <i class="fas fa-star review--star"></i>
       <% else %>
-        <i class="far fa-star review_average--star"></i>
+        <i class="far fa-star review--star"></i>
       <% end %>
     <% end %>
     <span class="review_average--text"><%= average_rating %> out of 5</span>
   </div>
   <span class="review_average--total"><%= total_ratings %> user ratings</span>
+  <% @list.reviews.each do |review| %>
+    <div class="review_card">
+      <p>
+        <% review.rating.times do %>
+          <i class="fas fa-star review--star"></i>
+        <% end %>
+      </p>
+      <p><%= review.content %></p>
+    </div>
+  <% end %>
+  <%= form_for [@list, @review] do |f| %>
+    <%= f.text_area :content %>
+    <%= f.select :rating, options_for_select(1..5), required: true %>
+    <%= f.submit "Rate my list" %>
+  <% end %>
 </div>
-
-<% @list.reviews.each do |review| %>
-  <div class="review_card">
-    <p><%= review.rating %></p>
-    <p><%= review.content %></p>
-  </div>
-<% end %>
-
-<%= form_for [@list, @review] do |f| %>
-  <%= f.text_area :content %>
-  <%= f.select :rating, options_for_select(1..5), required: true %>
-  <%= f.submit "Rate my list" %>
-<% end %>
 
 <%= link_to 'Back', lists_path %>
