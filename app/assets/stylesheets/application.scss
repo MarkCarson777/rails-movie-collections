@@ -18,3 +18,13 @@ body {
   width: 100vw;
   background-color: $background;
 }
+
+// utilities
+
+.flex {
+  display: flex;
+}
+
+.justify-between {
+  justify-content: space-between;
+}

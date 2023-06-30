@@ -7,14 +7,19 @@
     <div class="movie_card">
       <% bookmark = Bookmark.find_by(list: @list, movie: movie) %>
       <%= image_tag movie.poster_url, width: 400, height: 300, crop: :fill %>
-      <h2>
+      <h2 class="flex justify-between">
         <%= movie.title %>
-        <%= movie.rating %>
+        <div>
+          <%= movie.rating %>
+          <i class="fab fa-imdb" style="font-size: 2rem;"></i>
+        </div>
       </h2>
       <div>
         <%= movie.overview %>
       </div>
-      <%= button_to 'Remove', bookmark_path(bookmark), method: :delete, :class => "btn_primary" %>
+      <%= button_to bookmark_path(bookmark), method: :delete, class: "btn_remove" do %>
+        <i class="fas fa-xmark"></i>
+      <% end %>
     </div>
   <% end %>
 </div>
